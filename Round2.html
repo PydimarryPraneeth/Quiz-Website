@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Round 2: General Knowledge</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url("https://png.pngtree.com/thumb_back/fh260/background/20200714/pngtree-modern-double-color-futuristic-neon-background-image_351866.jpg");
+      background-size: cover;
+      text-align: left;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .quiz-container {
+      background-color: rgba(255, 255, 255, 0.9);
+      width: 600px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .quiz-container h1 {
+      text-align: center;
+      font-size: 24px;
+      margin: 0;
+    }
+
+    .quiz-container #timer {
+      text-align: center;
+      border: 2px solid black;
+      background-color: rgb(0, 255, 38);
+      color: #fff;
+      padding: 5px;
+      border-radius: 10px;
+      margin: 20px auto;
+      width: 100px;
+    }
+
+    .quiz-container #score {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .quiz-container ol {
+      list-style: none;
+      padding: 0;
+    }
+
+    .quiz-container li {
+      margin: 20px 0;
+      font-size: 18px;
+    }
+
+    input[type="radio"] {
+      margin-right: 10px;
+    }
+
+    .quiz-container button {
+      background-color: #007BFF;
+      color: #fff;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      display: block;
+      margin: 20px auto;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Round 2: General Knowledge</h1>
+        <div id="timer">Time: 15:00</div>
+        <div id="score">Score: 0</div>
+        <form id="questions">
+            <ol>
+                <li>Which planet is known as the "Red Planet"?
+                    <br>
+                    <label><input type="radio" name="q1" value="A"> A) Venus</label><br>
+                    <label><input type="radio" name="q1" value="B"> B) Mars</label><br>
+                    <label><input type="radio" name="q1" value="C"> C) Jupiter</label><br>
+                    <label><input type="radio" name="q1" value="D"> D) Saturn</label>
+                </li>
+                <li>What is the largest planet in our solar system?
+                    <br>
+                    <label><input type="radio" name="q2" value="A"> A) Earth</label><br>
+                    <label><input type="radio" name="q2" value="B"> B) Mars</label><br>
+                    <label><input type="radio" name="q2" value="C"> C) Jupiter</label><br>
+                    <label><input type="radio" name="q2" value="D"> D) Saturn</label>
+                </li>
+                <li>Which gas do plants absorb from the atmosphere during photosynthesis?
+                    <br>
+                    <label><input type="radio" name="q3" value="A"> A) Oxygen (O2)</label><br>
+                    <label><input type="radio" name="q3" value="B"> B) Carbon dioxide (CO2)</label><br>
+                    <label><input type="radio" name="q3" value="C"> C) Nitrogen (N2)</label><br>
+                    <label><input type="radio" name="q3" value="D"> D) Hydrogen (H2)</label>
+                </li>
+                <li>What is the chemical symbol for gold?
+                    <br>
+                    <label><input type="radio" name="q4" value="A"> A) Go</label><br>
+                    <label><input type="radio" name="q4" value="B"> B) Au</label><br>
+                    <label><input type="radio" name="q4" value="C"> C) Ag</label><br>
+                    <label><input type="radio" name="q4" value="D"> D) Ge</label>
+                </li>
+                <li>What is the smallest prime number?
+                    <br>
+                    <label><input type="radio" name="q5" value="A"> A) 0</label><br>
+                    <label><input type="radio" name="q5" value="B"> B) 1</label><br>
+                    <label><input type="radio" name="q5" value="C"> C) 2</label><br>
+                    <label><input type="radio" name="q5" value="D"> D) 3</label>
+                </li>
+            </ol>
+        </form>
+        <button id="submit-button">Submit</button>
+    </div>
+    <script>
+        let timeLeft = 900; // 15 minutes in seconds
+        let timerInterval;
+        let score = 0; // Initialize the score
+
+        window.onload = function() {
+            startTimer();
+        };
+
+        function startTimer() {
+            const timer = document.getElementById("timer");
+            timerInterval = setInterval(function() {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timer.innerText = `Time: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                if (timeLeft === 0) {
+                    clearInterval(timerInterval);
+                    submitRound2();
+                }
+                timeLeft--;
+            }, 1000);
+        }
+
+        document.getElementById("submit-button").addEventListener("click", function() {
+            submitRound2();
+        });
+
+        function submitRound2() {
+            clearInterval(timerInterval);
+            const answers = {
+                q1: document.querySelector('input[name="q1"]:checked').value,
+                q2: document.querySelector('input[name="q2"]:checked').value,
+                q3: document.querySelector('input[name="q3"]:checked').value,
+                q4: document.querySelector('input[name="q4"]:checked').value,
+                q5: document.querySelector('input[name="q5"]:checked').value,
+            };
+
+                        // Calculate the score
+                        if (answers.q1 === 'B') score += 2; // Correct answer is B
+            if (answers.q2 === 'C') score += 2; // Correct answer is C
+            if (answers.q3 === 'B') score += 2; // Correct answer is B
+            if (answers.q4 === 'B') score += 2; // Correct answer is B
+            if (answers.q5 === 'C') score += 2; // Correct answer is C
+
+            // Update the score display
+            const scoreDisplay = document.getElementById("score");
+            scoreDisplay.innerText = `Score: ${score}`;
+
+            // Redirect to the next page or display the result
+            if (score >= 7.5) {
+                window.location.href = "page4.html"; // Redirect to Round 3
+            } else {
+                window.location.href = "result.html"; // Redirect to Result Page
+            }
+        }
+    </script>
+</body>
+</html>
+
+            

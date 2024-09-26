@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Round 3: Logo Identification</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url("https://png.pngtree.com/thumb_back/fh260/background/20200714/pngtree-modern-double-color-futuristic-neon-background-image_351866.jpg");
+      background-size: cover;
+      text-align: left;
+      background-position: center;
+    }
+
+    .quiz-container {
+      background-color: #fff;
+      width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    #question {
+      font-weight: bold;
+    }
+
+    #quiz-form {
+      margin: 10px 0;
+    }
+
+    input[type="radio"] {
+      margin: 5px;
+    }
+
+    button {
+      background-color: #007BFF;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #timer {
+      margin: 20px 160px 0px 160px;
+      border: 2px solid black;
+      background-color: red;
+      color: #fff;
+      padding: 5px;
+      text-align: center;
+    }
+
+    #score {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    img {
+      width: 150px;
+      height: 150px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="quiz-container">
+    <h1>Round 3: Logo Identification</h1>
+    <div id="timer">Time: 8:00</div>
+    <form id="questions">
+      <ol>
+        <li>
+          <img src="C:\Users\PRANEETH\Downloads\logo1.jpg" alt="Logo 1">
+          <br>
+          <label><input type="radio" name="q1" value="A"> A) Nike</label><br>
+          <label><input type="radio" name="q1" value="B"> B) Adidas</label><br>
+          <label><input type="radio" name="q1" value="C"> C) Puma</label><br>
+          <label><input type="radio" name="q1" value="D"> D) Sketchers</label>
+        </li>
+        <li>
+          <img src="C:\Users\PRANEETH\Downloads\logo2.png" alt="Logo 2">
+          <br>
+          <label><input type="radio" name="q2" value="A"> A) Burger King</label><br>
+          <label><input type="radio" name="q2" value="B"> B) Mc Donalds</label><br>
+          <label><input type="radio" name="q2" value="C"> C) Dominos</label><br>
+          <label><input type="radio" name="q2" value="D"> D) Pizza hut</label>
+        </li>
+        <li>
+          <img src="C:\Users\PRANEETH\Downloads\logo3.png" alt="Logo 3">
+          <br>
+          <label><input type="radio" name="q3" value="A"> A) Pizza hut</label><br>
+          <label><input type="radio" name="q3" value="B"> B) Burger King</label><br>
+          <label><input type="radio" name="q3" value="C"> C) Starbucks</label><br>
+          <label><input type="radio" name="q3" value="D"> D) Dominos</label>
+        </li>
+        <li>
+          <img src="C:\Users\PRANEETH\Downloads\logo4.jpg" alt="Logo 4">
+          <br>
+          <label><input type="radio" name="q4" value="A"> A) Toyota</label><br>
+          <label><input type="radio" name="q4" value="B"> B) Tavera</label><br>
+          <label><input type="radio" name="q4" value="C"> C) Audi</label><br>
+          <label><input type="radio" name="q4" value="D"> D) Benz</label>
+        </li>
+        <li>
+          <img src="C:\Users\PRANEETH\Downloads\logo5.jpg" alt="Logo 5">
+          <br>
+          <label><input type="radio" name="q5" value="A"> A) Vivo</label><br>
+          <label><input type="radio" name="q5" value="B"> B) Motorola</label><br>
+          <label><input type="radio" name="q5" value="C"> C) Samsung</label><br>
+          <label><input type="radio" name="q5" value="D"> D) Apple</label>
+        </li>
+      </ol>
+    </form>
+    <button id="submit-button">Submit</button>
+    <div id="score"></div>
+  </div>
+  <script>
+    let timeLeft = 480; // 8 minutes in seconds
+    let timerInterval;
+
+    window.onload = function() {
+      startTimer();
+    };
+
+    function startTimer() {
+      const timer = document.getElementById("timer");
+      timerInterval = setInterval(function() {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        timer.innerText = `Time: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        if (timeLeft === 0) {
+          clearInterval(timerInterval);
+          submitRound3();
+        }
+        timeLeft--;
+      }, 1000);
+    }
+
+    document.getElementById("submit-button").addEventListener("click", function() {
+      submitRound3();
+    });
+
+    function submitRound3() {
+      clearInterval(timerInterval);
+      const answers = {
+        q1: document.querySelector('input[name="q1"]:checked').value,
+        q2: document.querySelector('input[name="q2"]:checked').value,
+        q3: document.querySelector('input[name="q3"]:checked').value,
+        q4: document.querySelector('input[name="q4"]:checked').value,
+        q5: document.querySelector('input[name="q5"]:checked').value,
+      };
+
+      // Calculate score3 and proceed to the next page or display the result
+      let score3 = 0;
+      if (answers.q1 === 'C') score3 += 4; // Correct answer is C
+      if (answers.q2 === 'D') score3 += 4; // Correct answer is D
+      if (answers.q3 === 'B') score3 += 4; // Correct answer is B
+      if (answers.q4 === 'C') score3 += 4; // Correct answer is C
+      if (answers.q5 === 'C') score3 += 4; // Correct answer is C
+
+      // Display the score
+      const scoreElement = document.getElementById("score");
+      scoreElement.innerText = `Your Score: ${score3}`;
+
+      
+    }
+  </script>
+</body>
+
+</html>
+

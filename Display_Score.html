@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quiz Result</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url("https://png.pngtree.com/thumb_back/fh260/background/20200714/pngtree-modern-double-color-futuristic-neon-background-image_351866.jpg");
+      text-align: center;
+      background-size: cover;
+      background-position: center;
+    
+    }
+
+    h1 {
+      background-color: #00000088;
+      color: #fff;
+      padding: 20px;
+    }
+
+    #result {
+      background-color: #fff;
+      width: 600px;
+      margin: 10em auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 9px;
+      margin-top: 20px;
+    }
+
+    p {
+      font-size: 18px;
+    }
+
+    #cumulative-score {
+      font-weight: bold;
+      color: #007BFF;
+    }
+
+    #admission-status {
+      font-weight: bold;
+      color: #007BFF;
+    }
+    .ch{
+        font-weight: bold;
+      color: #007BFF;
+    }
+    
+  </style>
+</head>
+<body>
+  <h1>Quiz Result</h1>
+  <div id="result">
+    <p>Your Cumulative Score:</p>
+    <div class="ch">
+    <p > 8.9</p>
+    <p > You have admitted in Chennai Campus </p>
+    </div>
+  </div>
+  <script>
+    window.onload = function() {
+      // Retrieve scores from local storage for each round
+      const scoreRound1 = parseFloat(localStorage.getItem('scoreRound1')) || 0;
+      const scoreRound2 = parseFloat(localStorage.getItem('scoreRound2')) || 0;
+      const scoreRound3 = parseFloat(localStorage.getItem('scoreRound3')) || 0;
+
+      // Calculate the cumulative score
+      const cumulativeScore = scoreRound1 + scoreRound2 + scoreRound3;
+
+      // Display the cumulative score
+      const cumulativeScoreElement = document.getElementById('cumulative-score');
+      cumulativeScoreElement.innerText = cumulativeScore.toFixed(2);
+
+      // Determine admission status based on the cumulative score
+      let admissionStatus = '';
+      if (cumulativeScore >= 9.5) {
+        admissionStatus = 'Congratulations! You are admitted to Vellore campus.';
+      } else if (cumulativeScore >= 7.5 && cumulativeScore < 9.5) {
+        admissionStatus = 'You are admitted to Chennai campus.';
+      } else if (cumulativeScore >= 6.5 && cumulativeScore < 7.5) {
+        admissionStatus = 'You are admitted to Amravati campus.';
+      } else {
+        admissionStatus = 'You are not admitted.';
+      }
+
+      // Display the admission status
+      const admissionStatusElement = document.getElementById('admission-status');
+      admissionStatusElement.innerText = admissionStatus;
+    };
+  </script>
+</body>
+</html>
